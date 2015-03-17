@@ -26,7 +26,7 @@ public class DBAppController
 
 	{
 
-		dataController = new DBController(this);
+		setDataController(new DBController(this));
 
 		baseFrame = new DBFrame(this);
 
@@ -42,9 +42,18 @@ public class DBAppController
 	{
 		return baseFrame;
 	}
+	public DBController getDataController()
+	{
+		return dataController;
+	}
 	public void setBaseFrame(DBFrame baseFrame) 
 	{
 		this.baseFrame = baseFrame;
+	}
+	
+	public void setDataController(DBController dataController)
+	{
+		this.dataController = dataController;
 	}
 	
 	
