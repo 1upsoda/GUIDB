@@ -1,9 +1,8 @@
 package database.controller;
 
+import java.util.ArrayList;
 
-
-
-
+import database.model.QueryInfo;
 import database.view.DBFrame;
 import database.view.DBPanel;
 
@@ -21,12 +20,15 @@ public class DBAppController
 	 * the database controlling the actuall info of the database
 	 */
 	private DBController dataController;
+	
+	private ArrayList<QueryInfo> queryList;
 
 	public DBAppController()
-
 	{
 
 		setDataController(new DBController(this));
+		
+		queryList = new ArrayList<QueryInfo>();
 
 		baseFrame = new DBFrame(this);
 
@@ -55,6 +57,9 @@ public class DBAppController
 	{
 		this.dataController = dataController;
 	}
-	
+	public ArrayList<QueryInfo> getQueryList()
+	{
+		return queryList;
+	}
 	
 }

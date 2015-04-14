@@ -1,6 +1,7 @@
 package database.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +21,8 @@ public class DBPanel extends JPanel
 	private JScrollPane displayPane;
 	private JTextArea displayArea;
 	private JTable resultsTable;
+	private JPasswordField samplePassword;
+	private TableCellWrapRenderer cellRenderer;
 
 	public DBPanel(DBAppController baseController)
 	{
@@ -27,9 +30,14 @@ public class DBPanel extends JPanel
 
 		baseLayout = new SpringLayout();
 		queryButton = new JButton("Click here to test the query");
+		baseLayout.putConstraint(SpringLayout.NORTH, queryButton, 0, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, queryButton, 99, SpringLayout.WEST, this);
 
 		displayArea = new JTextArea(10, 30);
 		displayPane = new JScrollPane(displayArea);
+		samplePassword = new JPasswordField(null, 20);
+		cellRenderer = new TableCellWrapRenderer();
+		baseLayout.putConstraint(SpringLayout.WEST, samplePassword, 10, SpringLayout.WEST, this);
 
 		//setupDisplayPane();
 		setupTable();
@@ -70,12 +78,15 @@ public class DBPanel extends JPanel
 		DefaultTableModel basicData = new DefaultTableModel(baseController.getDataController().realResults(), baseController.getDataController().getMetaDataTitles());
 		resultsTable = new JTable(basicData);
 		displayPane = new JScrollPane(resultsTable);
+		baseLayout.putConstraint(SpringLayout.SOUTH, samplePassword, -6, SpringLayout.NORTH, displayPane);
+		for(int spot=0; spot<resultsTable.getColumnCount(); spot++)
+		{
+			resultsTable.getColumnModel().getColumn(spot).setCellRenderer(cellRenderer);
+		}
 	}
 
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, queryButton, 40, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, queryButton, 80, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, displayPane, 80, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, displayPane, 80, SpringLayout.WEST, this);
 
@@ -88,6 +99,10 @@ public class DBPanel extends JPanel
 		this.setLayout(baseLayout);
 		this.add(displayPane);
 		this.add(queryButton);
+		this.add(samplePassword);
+		samplePassword.setEchoChar('¥');
+		samplePassword.setFont(new Font("Serif", Font.BOLD, 32));
+		samplePassword.setForeground(Color.MAGENTA);
 
 	}
 }
