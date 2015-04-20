@@ -33,7 +33,7 @@ public class DBController
 	public DBController(DBAppController baseController)
 	{
 		this.baseController = baseController;
-		this.connectionString = "jdbc:mysql://localhost/information_schema?user=root";
+		this.connectionString = "jdbc:mysql://10.228.5.160/book_reading?user=t.parsons&password=pars901";
 		queryTime = 0;
 		checkDriver();
 		setupConnection();
@@ -185,7 +185,7 @@ public class DBController
 	public String [][] realResults()
 	{
 		String[][] results;
-		currentQuery = "SELECT * FROM `INNODB_SYS_COLUMNS`";
+		currentQuery = "SELECT * FROM `authors`";
 		long startTime, endTime;
 		startTime = System.currentTimeMillis();
 		try
@@ -239,7 +239,44 @@ public class DBController
 	public String[] getMetaDataTitles()
 	{
 		String[] columns;
-		currentQuery = "SELECT * FROM `INNODB_SYS_COLUMNS`";
+		currentQuery = "SELECT * FROM `authors`";
+
+		long startTime, endTime;
+		startTime = System.currentTimeMillis();
+		try
+		{
+			Statement firstStatement = databaseConnection.createStatement();
+			ResultSet answers = firstStatement.executeQuery(currentQuery);
+
+			ResultSetMetaData answerData = answers.getMetaData();
+			columns = new String[answerData.getColumnCount()];
+
+			// sets the name of each of the objects in the one column to the
+			// name of the next table//
+			for (int column = 0; column < answerData.getColumnCount(); column++)
+			{
+				columns[column] = answerData.getColumnName(column + 1);
+			}
+
+			answers.close();
+			firstStatement.close();
+			endTime = System.currentTimeMillis();
+		}
+		catch (SQLException currentException)
+		{
+			endTime = System.currentTimeMillis();
+			columns = new String[] { "empty" };
+			displayErrors(currentException);
+
+		}
+		queryTime = endTime-startTime;
+		baseController.getQueryList().add(new QueryInfo(currentQuery, queryTime));
+		return columns;
+	}
+	public String[] getDatabaseColumnNames(String tableName)
+	{
+		String[] columns;
+		currentQuery = "SELECT * FROM `" + tableName + "`";
 
 		long startTime, endTime;
 		startTime = System.currentTimeMillis();
@@ -469,5 +506,8 @@ public class DBController
 	{
 		this.currentQuery = query;
 	}
+
+
+	
 
 }

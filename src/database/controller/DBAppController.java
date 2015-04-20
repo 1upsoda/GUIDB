@@ -2,6 +2,8 @@ package database.controller;
 
 import java.util.ArrayList;
 
+import dataView.dataFrame;
+import dataView.dataPanel;
 import database.model.QueryInfo;
 import database.view.DBFrame;
 import database.view.DBPanel;
@@ -11,11 +13,11 @@ public class DBAppController
 	/**
 	 * the base frame of the GUI
 	 */
-	private DBFrame baseFrame;
+	private dataFrame baseFrame;
 	/**
 	 * the base panel of the GUI
 	 */
-	private DBPanel myAppPanel;
+	private dataPanel myAppPanel;
 	/**
 	 * the database controlling the actuall info of the database
 	 */
@@ -30,7 +32,8 @@ public class DBAppController
 		
 		queryList = new ArrayList<QueryInfo>();
 
-		baseFrame = new DBFrame(this);
+		baseFrame = new dataFrame(this);
+		
 
 	}
 	public void start()
@@ -40,7 +43,7 @@ public class DBAppController
 	}
 	
 	
-	public DBFrame getBaseFrame() 
+	public dataFrame getBaseFrame() 
 	{
 		return baseFrame;
 	}
@@ -48,7 +51,7 @@ public class DBAppController
 	{
 		return dataController;
 	}
-	public void setBaseFrame(DBFrame baseFrame) 
+	public void setBaseFrame(dataFrame baseFrame) 
 	{
 		this.baseFrame = baseFrame;
 	}

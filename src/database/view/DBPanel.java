@@ -53,7 +53,7 @@ public class DBPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				String[] temp = baseController.getDataController().getMetaDataTitles();
+				String[] temp = baseController.getDataController().getDatabaseColumnNames("books");
 				for (String current : temp)
 				{
 					displayArea.setText(displayArea.getText() + " Column : " + current + "\n");
@@ -75,10 +75,11 @@ public class DBPanel extends JPanel
 
 	private void setupTable()
 	{
-		DefaultTableModel basicData = new DefaultTableModel(baseController.getDataController().realResults(), baseController.getDataController().getMetaDataTitles());
+		DefaultTableModel basicData = new DefaultTableModel(baseController.getDataController().testResults(), baseController.getDataController().getMetaDataTitles());
 		resultsTable = new JTable(basicData);
 		displayPane = new JScrollPane(resultsTable);
-		baseLayout.putConstraint(SpringLayout.SOUTH, samplePassword, -6, SpringLayout.NORTH, displayPane);
+		
+		
 		for(int spot=0; spot<resultsTable.getColumnCount(); spot++)
 		{
 			resultsTable.getColumnModel().getColumn(spot).setCellRenderer(cellRenderer);
@@ -89,7 +90,7 @@ public class DBPanel extends JPanel
 	{
 		baseLayout.putConstraint(SpringLayout.NORTH, displayPane, 80, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, displayPane, 80, SpringLayout.WEST, this);
-
+		baseLayout.putConstraint(SpringLayout.SOUTH, samplePassword, -6, SpringLayout.NORTH, displayPane);
 	}
 
 	private void setupPanel()

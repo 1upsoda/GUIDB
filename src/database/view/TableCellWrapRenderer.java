@@ -15,7 +15,14 @@ public class TableCellWrapRenderer extends JTextArea implements TableCellRendere
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, 
 			boolean hasFocus, int row, int column)
 	{
-		this.setText(value.toString());
+//		try
+//		{
+//			this.setText(value.toString());
+//		}
+//		catch (Exception e)
+//		{
+//			System.out.println(e.toString());
+//		}
 		this.setWrapStyleWord(true);
 		this.setLineWrap(true);
 		int fontHeight = this.getFontMetrics(this.getFont()).getHeight();
