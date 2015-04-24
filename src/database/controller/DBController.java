@@ -66,6 +66,24 @@ public class DBController
 
 	}
 
+	public void submitUpdateQuery(String query)
+	{
+		this.currentQuery = query;
+		long startTime = System.currentTimeMillis();
+		long endTime = 0;
+		try
+		{
+			Statement updateStatement = databaseConnection.createStatement();
+			updateStatement.executeUpdate(query);
+			endTime = System.currentTimeMillis();
+		}
+		catch(SQLException currentError)
+		{
+			endTime = System.currentTimeMillis();
+			displayErrors(currentError);
+		}
+		baseController.getQueryList().add(new QueryInfo(query, endTime - startTime));
+	}
 	/**
 	 * makes sure nothing crashes it when you want to close the database
 	 */
