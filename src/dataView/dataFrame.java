@@ -27,7 +27,7 @@ public class dataFrame extends JFrame
 		{
 
 			basePanel = new dataPanel(baseController, "books");
-			
+			this.baseController = baseController;
 
 			setupFrame();
 			setupListeners();
@@ -42,59 +42,44 @@ public class dataFrame extends JFrame
 			@Override
 			public void windowActivated(WindowEvent arg0)
 			{
-				// TODO Auto-generated method stub
+				
 				
 			}
 
 			@Override
 			public void windowClosed(WindowEvent arg0)
 			{
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void windowClosing(WindowEvent arg0)
 			{
-				String chat = "";
-				String selectedTable = "books";
-				String [] columns = baseController.getDataController().getDatabaseColumnNames(selectedTable);
-				for(int count = 0; count<columns.length; count++)
-				{
-					if(!columns[count].equalsIgnoreCase("id"))
-					{
-					chat += columns[count];
-					}
-				}
-				basePanel.saveText(chat, false);
+				baseController.saveTimingInformation();
 				
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent arg0)
 			{
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent arg0)
 			{
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void windowIconified(WindowEvent arg0)
 			{
-				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
 			public void windowOpened(WindowEvent arg0)
 			{
-				// TODO Auto-generated method stub
 				
 			}
 			

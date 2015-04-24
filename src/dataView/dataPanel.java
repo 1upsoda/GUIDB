@@ -118,6 +118,7 @@ public class dataPanel extends JPanel
 			{
 				String query = "INSERT INTO " + "`" + table + "` " + getFields() + " VALUES " + getValues();
 				baseController.getDataController().submitUpdateQuery(query);
+				baseController.loadTimingInformation();
 			}
 			
 		});

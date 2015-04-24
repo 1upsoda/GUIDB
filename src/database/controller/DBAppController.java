@@ -42,12 +42,12 @@ public class DBAppController
 		queryList = new ArrayList<QueryInfo>();
 
 		baseFrame = new dataFrame(this);
-		QueryInfo a = new QueryInfo("lol",2);
-		QueryInfo b = new QueryInfo("llo",3);
-		QueryInfo c = new QueryInfo("olo",780);
-		queryList.add(a);
-		queryList.add(b);
-		queryList.add(c);
+//		QueryInfo a = new QueryInfo("lol",2);
+//		QueryInfo b = new QueryInfo("llo",3);
+//		QueryInfo c = new QueryInfo("olo",780);
+//		queryList.add(a);
+//		queryList.add(b);
+//		queryList.add(c);
 		saveTimingInformation();
 
 	}
@@ -71,20 +71,25 @@ public class DBAppController
 	{
 		this.baseFrame = baseFrame;
 	}
-	private void saveTimingInformation()
+	public void saveTimingInformation()
 	{
-		File saveFile;
-		String fileName = "/Users/tpar4829/Documents/saved text.txt";
+		File saveFile = new File("save.save");
+		if(saveFile.exists())
+		{
+			saveFile.delete();
+		}
+		saveFile = new File("save.save");
 		
 		PrintWriter outputWriter;
 		
 			try
 			{
-				outputWriter = new PrintWriter(new BufferedWriter(new FileWriter(fileName, false)));
+				outputWriter = new PrintWriter(new BufferedWriter(new FileWriter(saveFile, false)));
 				
 				for(int spot = 0; spot<queryList.size(); spot++)
 				{
-					outputWriter.println(queryList.get(spot).getQuery() + queryList.get(spot).getQueryTime());
+					outputWriter.println(queryList.get(spot).getQuery());
+					outputWriter.println(queryList.get(spot).getQueryTime());
 				}
 				outputWriter.close();
 			}
@@ -101,11 +106,11 @@ public class DBAppController
 		
 
 	}
-	private void loadTimingInformation()
+	public void loadTimingInformation()
 	{
 		try
 		{
-			File loadFile = new File("asdf.save");
+			File loadFile = new File("save.save");
 			if(loadFile.exists())
 			{
 				queryList.clear();
@@ -113,8 +118,10 @@ public class DBAppController
 				while(textScanner.hasNext())
 				{
 					String query = textScanner.nextLine();
-					textScanner.next();
-					queryList.add(new QueryInfo(query, textScanner.nextLong()));
+					long tempLine = Long.parseLong(textScanner.nextLine());
+					
+					
+					queryList.add(new QueryInfo(query, tempLine));
 				}
 				textScanner.close();
 				JOptionPane.showMessageDialog(getBaseFrame(), queryList.size() + " QueryInfo objects were loaded into the application");
