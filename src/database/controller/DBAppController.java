@@ -33,7 +33,9 @@ public class DBAppController
 	private DBController dataController;
 	
 	private ArrayList<QueryInfo> queryList;
-
+/**
+ * currently starts save time instantly so that i can be sure it works, remove to use function better, later
+ */
 	public DBAppController()
 	{
 
@@ -41,13 +43,17 @@ public class DBAppController
 		
 		queryList = new ArrayList<QueryInfo>();
 
+		dataPanel myAppPanel = (dataPanel) baseFrame.getContentPane();
+		
+		myAppPanel = new dataPanel(this, "scores");
+		
 		baseFrame = new dataFrame(this);
-//		QueryInfo a = new QueryInfo("lol",2);
-//		QueryInfo b = new QueryInfo("llo",3);
-//		QueryInfo c = new QueryInfo("olo",780);
-//		queryList.add(a);
-//		queryList.add(b);
-//		queryList.add(c);
+		QueryInfo a = new QueryInfo("lol",2);
+		QueryInfo b = new QueryInfo("llo",3);
+		QueryInfo c = new QueryInfo("olo",780);
+		queryList.add(a);
+		queryList.add(b);
+		queryList.add(c);
 		saveTimingInformation();
 
 	}
@@ -55,7 +61,17 @@ public class DBAppController
 	public void start()
 	{
 //		DBPanel myAppPanel = (DBPanel) baseFrame.getContentPane();
-		
+//		myAppPanel.
+////		DBAppController();
+//		setDataController(new DBController(this));
+//		
+//		queryList = new ArrayList<QueryInfo>();
+//
+//		dataPanel myAppPanel = (dataPanel) baseFrame.getContentPane();
+//		
+//		myAppPanel = new dataPanel(this, "books");
+//		
+//		baseFrame = new dataFrame(this);
 	}
 	
 	
@@ -71,6 +87,9 @@ public class DBAppController
 	{
 		this.baseFrame = baseFrame;
 	}
+	/**
+	 * currently able to save text, but whenever it is called it will overwrite EVERYTHING IN THE previous file
+	 */
 	public void saveTimingInformation()
 	{
 		File saveFile = new File("save.save");

@@ -26,7 +26,7 @@ public class dataFrame extends JFrame
 
 		{
 
-			basePanel = new dataPanel(baseController, "books");
+			basePanel = new dataPanel(baseController, "scores");
 			this.baseController = baseController;
 
 			setupFrame();

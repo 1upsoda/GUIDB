@@ -33,7 +33,8 @@ public class DBController
 	public DBController(DBAppController baseController)
 	{
 		this.baseController = baseController;
-		this.connectionString = "jdbc:mysql://10.228.5.160/book_reading?user=t.parsons&password=pars901";
+//		this.connectionString = "jdbc:mysql://10.228.5.160/book_reading?user=t.parsons&password=pars901";
+		this.connectionString = "jdbc:mysql://localhost/information_schema?user=root";
 		queryTime = 0;
 		checkDriver();
 		setupConnection();
@@ -203,7 +204,7 @@ public class DBController
 	public String [][] realResults()
 	{
 		String[][] results;
-		currentQuery = "SELECT * FROM `authors`";
+		currentQuery = "SELECT * FROM `games`";
 		long startTime, endTime;
 		startTime = System.currentTimeMillis();
 		try
@@ -257,7 +258,7 @@ public class DBController
 	public String[] getMetaDataTitles()
 	{
 		String[] columns;
-		currentQuery = "SELECT * FROM `authors`";
+		currentQuery = "SELECT * FROM `games`";
 
 		long startTime, endTime;
 		startTime = System.currentTimeMillis();
@@ -291,10 +292,10 @@ public class DBController
 		baseController.getQueryList().add(new QueryInfo(currentQuery, queryTime));
 		return columns;
 	}
-	public String[] getDatabaseColumnNames(String tableName)
+	public String[] getDatabaseColumnNames(String tables)
 	{
 		String[] columns;
-		currentQuery = "SELECT * FROM `" + tableName + "`";
+		currentQuery = "SELECT * FROM `" + tables + "`";
 
 		long startTime, endTime;
 		startTime = System.currentTimeMillis();
